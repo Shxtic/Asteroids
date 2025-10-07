@@ -14,6 +14,11 @@ def main():
     # Screen initialization
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    # Intializing Drawable and Updatable Segments into Pygame Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     # Player initialization
     MainPlayer = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_RADIUS)
 
@@ -23,7 +28,12 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill(000000, rect=None, special_flags=0)
-        MainPlayer.draw(screen)
+
+        updatable.update(dt)
+
+        for draw in drawable:
+            draw.draw(screen)
+
         pygame.display.flip()
         # setting fps and calculating delta time
         delta_time = clock.tick(60)
