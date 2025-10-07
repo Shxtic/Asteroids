@@ -53,7 +53,7 @@ def main():
             for shot in shots:
                 if asteroid.check_collisions(shot) == True:
                     asteroid.kill()
-                    shot.kill
+                    shot.kill()
                     break
                 else:
                     continue
